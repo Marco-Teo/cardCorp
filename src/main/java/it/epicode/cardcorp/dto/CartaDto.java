@@ -12,6 +12,5 @@ public class CartaDto {
     private double prezzo;
     private boolean preferita;
     private boolean inCollezione;
-
     private Rarita rarita;
 }

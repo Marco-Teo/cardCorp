@@ -20,4 +20,8 @@ public class Carta {
 
     @Enumerated(EnumType.STRING)
     private Rarita rarita;
+
+    @ManyToOne
+    @JoinColumn(name = "collezione_id")
+    private Collezione collezione;
 }

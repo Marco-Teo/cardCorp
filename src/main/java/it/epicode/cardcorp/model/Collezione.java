@@ -1,0 +1,23 @@
+package it.epicode.cardcorp.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.Set;
+
+@Entity
+@Data
+public class Collezione {
+
+    @Id
+    @GeneratedValue
+    private  int id;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "collezione")
+    private Set<Carta> carte;
+
+}
