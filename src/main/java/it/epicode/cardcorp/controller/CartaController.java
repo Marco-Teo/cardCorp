@@ -64,4 +64,16 @@ public class CartaController {
     public ResponseEntity<List<Carta>> getByPrezzoRange(@RequestParam int min, @RequestParam int max) {
         return ResponseEntity.ok(cartaService.findByPrezzoBetween(min, max));
     }
+
+    @PostMapping("/{id}/preferita")
+    public ResponseEntity<Void> markAsFavorite(@PathVariable int id) throws NotFoundException {
+        cartaService.aggiungiAiPreferiti(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}/preferita")
+    public ResponseEntity<Void> unmarkAsFavorite(@PathVariable int id) throws NotFoundException {
+        cartaService.rimuoviDaiPreferiti(id);
+        return ResponseEntity.noContent().build();
+    }
 }

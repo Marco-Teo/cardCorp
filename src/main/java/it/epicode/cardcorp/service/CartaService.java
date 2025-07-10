@@ -59,6 +59,19 @@ public class CartaService {
         return cartaRepository.findByInCollezione(inCollezione);
     }
 
+
+    public void aggiungiAiPreferiti(int id) throws NotFoundException {
+        Carta carta = findById(id);
+        carta.setPreferita(true);
+        cartaRepository.save(carta);
+    }
+
+    public void rimuoviDaiPreferiti(int id) throws NotFoundException {
+        Carta carta = findById(id);
+        carta.setPreferita(false);
+        cartaRepository.save(carta);
+    }
+
     public void deleteCartae(int id) throws NotFoundException {
         Carta carta = findById(id);
         cartaRepository.delete(carta);

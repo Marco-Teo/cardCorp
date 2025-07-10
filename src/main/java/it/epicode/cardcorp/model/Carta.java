@@ -1,8 +1,12 @@
 package it.epicode.cardcorp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.cardcorp.enumeration.Rarita;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,7 +25,7 @@ public class Carta {
     @Enumerated(EnumType.STRING)
     private Rarita rarita;
 
-    @ManyToOne
-    @JoinColumn(name = "collezione_id")
-    private Collezione collezione;
+    @OneToMany(mappedBy = "carta")
+    @JsonIgnore
+    private Set<CartaCollezione> collezioni = new HashSet<>();
 }
