@@ -1,6 +1,7 @@
 package it.epicode.cardcorp.controller;
 
 import it.epicode.cardcorp.dto.UserDto;
+import it.epicode.cardcorp.exeption.AlreadyExistException;
 import it.epicode.cardcorp.exeption.NotFoundException;
 import it.epicode.cardcorp.model.User;
 import it.epicode.cardcorp.service.UserService;
@@ -18,11 +19,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody UserDto userDto) {
-        User user = userService.registerUser(userDto);
-        return ResponseEntity.ok(user);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<User> registerUser(@RequestBody UserDto userDto) {
+//        User user = userService.registerUser(userDto);
+//        return ResponseEntity.ok(user);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) throws NotFoundException {
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody UserDto userDto) throws NotFoundException {
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody UserDto userDto) throws NotFoundException, AlreadyExistException {
         User updatedUser = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedUser);
     }

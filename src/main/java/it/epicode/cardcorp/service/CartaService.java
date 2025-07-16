@@ -24,6 +24,7 @@ public class CartaService {
         carta.setUrlImmagine(cartaDto.getUrlImmagine());
         carta.setInCollezione(cartaDto.isInCollezione());
         carta.setPreferita(cartaDto.isPreferita());
+        carta.setRarita(cartaDto.getRarita());
 
         Carta savedCarta = cartaRepository.save(carta);
         return savedCarta;

@@ -1,11 +1,13 @@
 package it.epicode.cardcorp.service;
 
 import it.epicode.cardcorp.dto.UserDto;
+import it.epicode.cardcorp.exeption.AlreadyExistException;
 import it.epicode.cardcorp.exeption.NotFoundException;
 import it.epicode.cardcorp.model.User;
 import it.epicode.cardcorp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,15 +21,19 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
-    public User registerUser(UserDto userDto) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public User registerUser(UserDto userDto) throws AlreadyExistException {
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new IllegalArgumentException("Email già registrata. Prova a fare login o usa un'altra email.");
+            throw new AlreadyExistException("Email già registrata. Prova a fare login o usa un'altra email.");
         }
+
 
         User user = new User();
         user.setUserName(userDto.getUserName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setIndirizzo(userDto.getIndirizzo());
 
         try {
@@ -35,14 +41,27 @@ public class UserService {
             emailService.inviaBenvenuto(savedUser);
             return savedUser;
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("Errore di integrità: email duplicata o dati non validi.");
+            throw new AlreadyExistException("Vincolo di integrità violato: dati duplicati o non validi.");
         }
     }
+
+
 
     public User findById(int id) throws NotFoundException {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User con id " + id+ " trovato"));
         return user;
+    }
+
+//    public User findByEmail(String email) throws NotFoundException {
+//        User user = userRepository.findOneByEmail(email)
+//                .orElseThrow(() -> new NotFoundException("User con email " + email+ " trovato"));
+//        return user;
+//    }
+
+    public User findByEmail (String email) throws NotFoundException {
+        return userRepository.findOneByEmail(email).
+                orElseThrow(()-> new NotFoundException(email));
     }
 
     public Optional<User> findByUsername(String username) {
@@ -53,12 +72,13 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public User updateUser(int id, UserDto userDto) throws NotFoundException {
+    public User updateUser(int id, UserDto userDto) throws NotFoundException, AlreadyExistException {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User con id: " + id + " non trovato"));
 
-        if (!user.getEmail().equals(userDto.getEmail()) && userRepository.existsByEmail(userDto.getEmail())) {
-            throw new IllegalArgumentException("Questa email è già registrata da un altro utente.");
+        if (!user.getEmail().equals(userDto.getEmail())
+                && userRepository.existsByEmail(userDto.getEmail())) {
+            throw new AlreadyExistException("Questa email è già registrata da un altro utente.");
         }
 
         user.setUserName(userDto.getUserName());
@@ -73,6 +93,8 @@ public class UserService {
         return updatedUser;
     }
 
+
+
     public void deleteUser(int id) throws NotFoundException {
         User userToDelete = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User con id: " + id + " non trovato"));
@@ -83,4 +105,6 @@ public class UserService {
 
         System.out.println("Utente con id " + id + " eliminato e email inviata.");
     }
+
+
 }
