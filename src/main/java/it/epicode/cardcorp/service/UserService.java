@@ -1,6 +1,7 @@
 package it.epicode.cardcorp.service;
 
 import it.epicode.cardcorp.dto.UserDto;
+import it.epicode.cardcorp.enumeration.Role;
 import it.epicode.cardcorp.exeption.AlreadyExistException;
 import it.epicode.cardcorp.exeption.NotFoundException;
 import it.epicode.cardcorp.model.User;
@@ -35,6 +36,7 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setIndirizzo(userDto.getIndirizzo());
+        user.setRuolo(Role.USER);
 
         try {
             User savedUser = userRepository.save(user);
@@ -52,12 +54,6 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User con id " + id+ " trovato"));
         return user;
     }
-
-//    public User findByEmail(String email) throws NotFoundException {
-//        User user = userRepository.findOneByEmail(email)
-//                .orElseThrow(() -> new NotFoundException("User con email " + email+ " trovato"));
-//        return user;
-//    }
 
     public User findByEmail (String email) throws NotFoundException {
         return userRepository.findOneByEmail(email).

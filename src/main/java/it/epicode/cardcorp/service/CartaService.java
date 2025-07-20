@@ -1,6 +1,7 @@
 package it.epicode.cardcorp.service;
 
 import it.epicode.cardcorp.dto.CartaDto;
+import it.epicode.cardcorp.dto.FilterDto;
 import it.epicode.cardcorp.enumeration.Rarita;
 import it.epicode.cardcorp.exeption.NotFoundException;
 import it.epicode.cardcorp.model.Carta;
@@ -48,8 +49,11 @@ public class CartaService {
         return cartaRepository.findByPreferitaTrue();
     }
 
-    public List<Carta> searchCarteByName(String nome) {
-        return cartaRepository.findByNomeContainingIgnoreCase(nome);
+    public List<Carta> searchCarte(FilterDto filters) {
+        List<Carta> listaCarte;
+        listaCarte = cartaRepository.findByNomeContainingIgnoreCaseAndRaritaAndPrezzoBetween(filters.getNome(), filters.getRarita(),
+        filters.getMin(), filters.getMax());
+        return listaCarte;
     }
 
     public List<Carta> findByRarita(Rarita rarita) {

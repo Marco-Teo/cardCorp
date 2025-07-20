@@ -1,6 +1,7 @@
 package it.epicode.cardcorp.controller;
 
 import it.epicode.cardcorp.dto.CartaDto;
+import it.epicode.cardcorp.dto.FilterDto;
 import it.epicode.cardcorp.enumeration.Rarita;
 import it.epicode.cardcorp.exeption.NotFoundException;
 import it.epicode.cardcorp.model.Carta;
@@ -34,15 +35,16 @@ public class CartaController {
         return ResponseEntity.ok(cartaService.saveCarta(cartaDto));
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCarta(@PathVariable int id) throws NotFoundException {
         cartaService.deleteCartae(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Carta>> searchByNome(@RequestParam String nome) {
-        return ResponseEntity.ok(cartaService.searchCarteByName(nome));
+    @PostMapping("/search")
+    public ResponseEntity<List<Carta>> searchCarte(@RequestBody FilterDto filters) {
+        return ResponseEntity.ok(cartaService.searchCarte(filters));
     }
 
     @GetMapping("/preferite")
@@ -75,5 +77,10 @@ public class CartaController {
     public ResponseEntity<Void> unmarkAsFavorite(@PathVariable int id) throws NotFoundException {
         cartaService.rimuoviDaiPreferiti(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/rarities")
+    public Rarita[] getRarities() {
+        return Rarita.values();
     }
 }

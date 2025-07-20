@@ -14,5 +14,10 @@ public interface CartaRepository extends JpaRepository<Carta, Integer> {
     List<Carta> findByInCollezioneTrue();
     List<Carta> findByInCollezioneFalse();
     List<Carta> findByInCollezione(boolean inCollezione);
-
+    List<Carta> findByNomeContainingIgnoreCaseAndRaritaAndPrezzoBetween(
+            String nome,
+            Rarita rarita,
+            double prezzoMin,
+            double prezzoMax
+    );
 }

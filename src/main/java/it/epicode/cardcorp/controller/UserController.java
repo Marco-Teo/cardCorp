@@ -19,12 +19,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @PostMapping("/register")
-//    public ResponseEntity<User> registerUser(@RequestBody UserDto userDto) {
-//        User user = userService.registerUser(userDto);
-//        return ResponseEntity.ok(user);
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) throws NotFoundException {
         User user = userService.findById(id);
