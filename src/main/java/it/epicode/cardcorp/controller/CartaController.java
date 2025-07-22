@@ -47,19 +47,11 @@ public class CartaController {
         return ResponseEntity.ok(cartaService.searchCarte(filters));
     }
 
-    @GetMapping("/preferite")
-    public ResponseEntity<List<Carta>> getPreferite() {
-        return ResponseEntity.ok(cartaService.getCartePreferite());
-    }
+
 
     @GetMapping("/rarita")
     public ResponseEntity<List<Carta>> getByRarita(@RequestParam Rarita rarita) {
         return ResponseEntity.ok(cartaService.findByRarita(rarita));
-    }
-
-    @GetMapping("/collezione")
-    public ResponseEntity<List<Carta>> getByCollezione(@RequestParam boolean inCollezione) {
-        return ResponseEntity.ok(cartaService.findByInCollezione(inCollezione));
     }
 
     @GetMapping("/prezzo")

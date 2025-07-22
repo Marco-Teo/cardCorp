@@ -1,5 +1,6 @@
 package it.epicode.cardcorp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class OrdineCarta {
 
     @ManyToOne
     @JoinColumn(name = "ordine_id")
+    @JsonIgnore
     private Ordine ordine;
 
     @ManyToOne

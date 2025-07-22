@@ -11,6 +11,5 @@ public class CartaDto {
     private String urlImmagine;
     private double prezzo;
     private boolean preferita;
-    private boolean inCollezione;
     private Rarita rarita;
 }

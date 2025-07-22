@@ -23,8 +23,6 @@ public class CartaService {
         carta.setNome(cartaDto.getNome());
         carta.setPrezzo(cartaDto.getPrezzo());
         carta.setUrlImmagine(cartaDto.getUrlImmagine());
-        carta.setInCollezione(cartaDto.isInCollezione());
-        carta.setPreferita(cartaDto.isPreferita());
         carta.setRarita(cartaDto.getRarita());
 
         Carta savedCarta = cartaRepository.save(carta);
@@ -45,9 +43,7 @@ public class CartaService {
         return carta;
     }
 
-    public List<Carta> getCartePreferite() {
-        return cartaRepository.findByPreferitaTrue();
-    }
+
 
     public List<Carta> searchCarte(FilterDto filters) {
         List<Carta> listaCarte;
@@ -60,20 +56,15 @@ public class CartaService {
         return cartaRepository.findByRarita(rarita);
     }
 
-    public List<Carta> findByInCollezione(boolean inCollezione) {
-        return cartaRepository.findByInCollezione(inCollezione);
-    }
 
 
     public void aggiungiAiPreferiti(int id) throws NotFoundException {
         Carta carta = findById(id);
-        carta.setPreferita(true);
         cartaRepository.save(carta);
     }
 
     public void rimuoviDaiPreferiti(int id) throws NotFoundException {
         Carta carta = findById(id);
-        carta.setPreferita(false);
         cartaRepository.save(carta);
     }
 

@@ -19,13 +19,12 @@ public class Carta {
     private String descrizione;
     private String urlImmagine;
     private double prezzo;
-    private boolean preferita = false;
-    private boolean inCollezione = false;
 
     @Enumerated(EnumType.STRING)
     private Rarita rarita;
 
-    @OneToMany(mappedBy = "carta")
+    @ManyToMany(mappedBy = "favoriteCards")
     @JsonIgnore
-    private Set<CartaCollezione> collezioni = new HashSet<>();
+    private Set<User> usersWhoFavorited = new HashSet<>();
+
 }
