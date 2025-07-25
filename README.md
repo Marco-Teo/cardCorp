@@ -14,17 +14,18 @@ Carrello e checkout con creazione ordini per utenti loggati.
 
 CRUD carte riservato agli amministratori con la possibilita di aggiungere e rimuovere carte.
 
-cardcorp/
-├─ backend/ # Applicazione Spring Boot
-│ ├─ src/main/java/ # Codice sorgente Java
-│ ├─ src/main/resources/ # Risorse (configurazioni, file statici)
-│ │ └─ application.properties
-│ └─ pom.xml # Dipendenze e plugin Maven
-└─ frontend/ # Applicazione Next.js
-├─ pages/ # Pagine React
-├─ components/ # Componenti UI
-├─ state/ # Redux slices
-└─ package.json # Dipendenze Node.js
+`cardcorp/
+├─ backend/                    # Applicazione Spring Boot
+│  ├─ src/main/java/           # Codice sorgente Java
+│  ├─ src/main/resources/      # Risorse (configurazioni, file statici)
+│  │  └─ application.properties
+│  └─ pom.xml                  # Dipendenze e plugin Maven
+└─ frontend/                   # Applicazione Next.js
+   ├─ pages/                   # Pagine React
+   ├─ components/              # Componenti UI
+   ├─ state/                   # Redux slices
+   └─ package.json             # Dipendenze Node.js`
+
     
 Configurazione
 
