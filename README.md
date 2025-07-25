@@ -50,8 +50,7 @@ git clone https://github.com/Marco-Teo/card-corp.git
    ```
 2. Avvio:
    ```bash
-   cd backend
-   mvn spring-boot:run
+   andare nella pagina CardcorpApplication e premere il triangolo verde in alto a destra.
    ```
 
 ### Frontend
