@@ -57,7 +57,7 @@ Avvio
 Backend
 
 cd backend
-per avviare il back-end andare alla pagina CardcorpApplication e premere il triangolo verde in alto come in foto 
+per avviare il back-end andare alla pagina CardcorpApplication e premere il triangolo verde in alto
 
 
 Frontend
