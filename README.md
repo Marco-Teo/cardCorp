@@ -65,12 +65,14 @@ qua c'è una piccola guida su come startare il DB su MacOs
     Link
     ```
     https://www.atlassian.com/data/sql/how-to-start-a-postgresql-server-on-mac-os-x
+    
      ```
 
 qua c'è una piccola guida su come startare il DB su Windows
     Link
     ```
     https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database
+    
      ```
 
 3. Avvio:
