@@ -32,15 +32,17 @@ cardcorp/
 
 ```bash
 # Frontend
-git clone https://github.com/Marco-Teo/cardcorp.git
+git clone https://github.com/Marco-Teo/card-corp.git
 
 # Backend
-git clone https://github.com/Marco-Teo/card-corp.git
+git clone https://github.com/Marco-Teo/cardcorp.git
 ```
 
 ### Backend
+se vuoi avviare il progetto su Visual Studio Code devi avere questa estebsuine altrimenti non riesci a far partire la repo per il back-end 
+`https://open-vsx.org/extension/vscjava/vscode-java-pack`
 
-1. Crea un database PostgreSQL e configura le credenziali in `backend/src/main/resources/application.properties`:
+1. Crea un database PostgreSQL e configura le credenziali, ricorda di usare i tuoi dati per tutti i campi altrimenti non funziona, in `backend/src/main/resources/application.properties`:
    ```properties
    spring.datasource.url=jdbc:postgresql://localhost:5432/cardcorp
    spring.datasource.username=tuo_user
@@ -48,7 +50,30 @@ git clone https://github.com/Marco-Teo/card-corp.git
    jwt.secret=una-chiave-segreta-lunga-almeno-53-caratteri
    jwt.duration=1800000
    ```
-2. Avvio:
+   la cosa migliore sarebbe anche creare un file a posta chiamato `env.properties`
+   con al suo interno le seguenti propreita, questi nomi di proprieta possono essere utilizzati nella parte superiore per tenere questi dati riservati e non doverli rendere publici.
+   ```properties
+   cloud_name=pw_cloud
+   api_key=api_key
+   api_secret=api_secret
+   postgresql.password=pw_postgres
+   gmail.password=pw_gmail
+   gmail.from=la_tua_email
+
+      ```
+qua c'è una piccola guida su come startare il DB su MacOs
+    ```Link
+    
+    https://www.atlassian.com/data/sql/how-to-start-a-postgresql-server-on-mac-os-x
+     ```
+
+qua c'è una piccola guida su come startare il DB su Windows
+    ```Link
+    
+    https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database
+     ```
+
+3. Avvio:
    ```bash
    andare nella pagina CardcorpApplication e premere il triangolo verde in alto a destra.
    ```
