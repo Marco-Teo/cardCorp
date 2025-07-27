@@ -62,15 +62,15 @@ se vuoi avviare il progetto su Visual Studio Code devi avere questa estebsuine a
 
       ```
 qua c'è una piccola guida su come startare il DB su MacOs
-    ```Link
-    
+    Link
+    ```
     https://www.atlassian.com/data/sql/how-to-start-a-postgresql-server-on-mac-os-x
     
      ```
 
 qua c'è una piccola guida su come startare il DB su Windows
-    ```Link
-    
+    Link
+    ```
     https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database
     
      ```
